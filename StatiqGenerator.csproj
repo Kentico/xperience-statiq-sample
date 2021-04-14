@@ -14,4 +14,8 @@
 	<PackageReference Include="Kentico.Xperience.Libraries" Version="13.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="input\assets\attachments\" />
+  </ItemGroup>
+
 </Project>

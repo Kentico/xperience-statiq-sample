@@ -15,13 +15,13 @@ namespace StatiqGenerator
             };
 
             ProcessModules = new ModuleList {
+                new XperienceAttachmentDownloader(),
                 new MergeContent(
                     new ReadFiles(patterns: readPath)
                 ),
-
                 new RenderRazor().WithModel(Config.FromDocument((doc, context) =>
-                    XperienceDocumentConverter.ToPageType<TPageType>(doc)
-                )),
+                    XperienceDocumentConverter.ToTreeNode<TPageType>(doc)
+                ))
             };
 
             OutputModules = new ModuleList {

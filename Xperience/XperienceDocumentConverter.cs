@@ -22,14 +22,14 @@ namespace StatiqGenerator
         public static IDocument FromTreeNode(IExecutionContext context, TreeNode node)
         {
             var metadata = new List<KeyValuePair<string, object>>();
-             metadata.AddRange(node.Properties.Select(
+            metadata.AddRange(node.Properties.Select(
                  key => new KeyValuePair<string, object>(key, node.GetValue(key))
              ));
             
             return context.CreateDocument(metadata);
         }
 
-        public static TPageType ToPageType<TPageType>(IDocument doc) where TPageType : TreeNode, new()
+        public static TPageType ToTreeNode<TPageType>(IDocument doc) where TPageType : TreeNode, new()
         {
             var node = TreeNode.New<TPageType>();
             foreach (var prop in node.Properties)

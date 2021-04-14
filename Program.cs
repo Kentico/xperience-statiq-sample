@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using CMS.DocumentEngine.Types.Statiq;
 using Statiq.App;
 using Statiq.Common;
+using Statiq.Core;
 using Statiq.Web;
 
 namespace StatiqGenerator
@@ -16,7 +17,7 @@ namespace StatiqGenerator
                 "content/author.cshtml",
                 Config.FromDocument((doc, ctx) =>
                 {
-                    var author = XperienceDocumentConverter.ToPageType<Author>(doc);
+                    var author = XperienceDocumentConverter.ToTreeNode<Author>(doc);
                     return new NormalizedPath($"authors/{author.FirstName}_{author.LastName}.html");
                 }))
             },
@@ -26,7 +27,7 @@ namespace StatiqGenerator
                 "content/book.cshtml",
                 Config.FromDocument((doc, ctx) =>
                 {
-                    var book = XperienceDocumentConverter.ToPageType<Book>(doc);
+                    var book = XperienceDocumentConverter.ToTreeNode<Book>(doc);
                     return new NormalizedPath($"books/{book.Title}.html");
                 }))
             }
@@ -39,6 +40,7 @@ namespace StatiqGenerator
                 .Factory
                 .CreateDefault(args)
                 .RegisterXperiencePipelines(pipelines)
+                .AddPipeline("Assets", outputModules: new IModule[] { new CopyFiles("assets/**") })
                 .AddHostingCommands()
                 .RunAsync();
         }
