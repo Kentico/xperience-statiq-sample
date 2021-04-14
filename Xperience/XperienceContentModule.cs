@@ -8,6 +8,12 @@ using Module = Statiq.Common.Module;
 
 namespace StatiqGenerator
 {
+    /// <summary>
+    /// An InputModule which accepts a <see cref="DocumentQuery"/> and executes the query. The output of the
+    /// <see cref="Module"/> is list of <see cref="IDocument"/> objects containing the properties of the nodes.
+    /// </summary>
+    /// <typeparam name="TPageType">A strongly-typed class which extends <see cref="TreeNode"/>, or just <see cref="TreeNode"/>
+    /// for generic queries</typeparam>
     public class XperienceContentModule<TPageType>
         : Module where TPageType : TreeNode, new()
     {

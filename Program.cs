@@ -4,46 +4,43 @@ using CMS.DocumentEngine.Types.Statiq;
 using Statiq.App;
 using Statiq.Common;
 using Statiq.Core;
+using Statiq.Razor;
 using Statiq.Web;
 
 namespace StatiqGenerator
 {
     class Program
     {
-        private static Dictionary<string, IPipeline> pipelines = new Dictionary<string, IPipeline>() {
-            { "Authors",
-                new XperienceContentPipeline<Author>(
-                AuthorProvider.GetAuthors(),
-                "content/author.cshtml",
-                Config.FromDocument((doc, ctx) =>
-                {
-                    var author = XperienceDocumentConverter.ToTreeNode<Author>(doc);
-                    return new NormalizedPath($"authors/{author.FirstName}_{author.LastName}.html");
-                }))
-            },
-            { "Books",
-                new XperienceContentPipeline<Book>(
-                BookProvider.GetBooks(),
-                "content/book.cshtml",
-                Config.FromDocument((doc, ctx) =>
-                {
-                    var book = XperienceDocumentConverter.ToTreeNode<Book>(doc);
-                    return new NormalizedPath($"books/{book.Title}.html");
-                }))
-            }
-        };
-
         public static async Task<int> Main(string[] args)
         {
             CMS.DataEngine.CMSApplication.Init();
             return await Bootstrapper
                 .Factory
                 .CreateDefault(args)
-                .RegisterXperiencePipelines(pipelines)
+                .AddPipeline<BookPipeline>()
+                .AddPipeline<AuthorPipeline>()
+                //.RegisterXperiencePipelines(Constants.Pipelines)
+                /*.AddSerialPipeline("Home",
+                    inputModules: new IModule[] { new ReadFiles(patterns: "index.cshtml") },
+                    processModules: new IModule[] {
+                        new RenderRazor().WithModel(Config.FromDocument((doc, context) =>
+                            new HomeViewModel()
+                            {
+                                Books = context.Outputs.FromPipeline(Constants.BookPipeline).ParallelSelectAsync(doc =>
+                                    Task.Run(() => XperienceDocumentConverter.ToTreeNode<Book>(doc))).Result,
+                                Authors = context.Outputs.FromPipeline(Constants.AuthorPipeline).ParallelSelectAsync(doc =>
+                                    Task.Run(() => XperienceDocumentConverter.ToTreeNode<Author>(doc))).Result
+                            }
+                        )),
+                        new SetDestination(Config.FromDocument((doc, ctx) => {
+                            return new NormalizedPath("index.html");
+                        }))
+                    },
+                    outputModules: new IModule[] { new WriteFiles() }
+                )*/
                 .AddPipeline("Assets", outputModules: new IModule[] { new CopyFiles("assets/**") })
                 .AddHostingCommands()
                 .RunAsync();
         }
-            
     }
 }

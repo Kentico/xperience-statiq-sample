@@ -1,7 +1,8 @@
-﻿using Statiq.Common;
+﻿using CMS.DocumentEngine.Types.Statiq;
+using Statiq.Common;
 using Statiq.Core;
 using Statiq.Razor;
-using Statiq.Yaml;
+using System.Threading.Tasks;
 
 namespace StatiqGenerator
 {
@@ -9,18 +10,21 @@ namespace StatiqGenerator
     {
         public HomePipeline()
         {
+            Dependencies.AddRange(nameof(AuthorPipeline), nameof(BookPipeline));
             InputModules = new ModuleList
             {
-                new ReadFiles("index.cshtml")
+                new ReadFiles(patterns: "index.cshtml")
             };
 
             ProcessModules = new ModuleList {
-                new ExtractFrontMatter(
-                    new ParseYaml()
-                ),
-
-                new RenderRazor().WithModel(new { }),
-
+                new RenderRazor().WithModel(Config.FromDocument((doc, context) =>
+                    new HomeViewModel() {
+                        Books = context.Outputs.FromPipeline(nameof(BookPipeline)).ParallelSelectAsync(doc =>
+                            Task.Run(() => XperienceDocumentConverter.ToTreeNode<Book>(doc))).Result,
+                        Authors = context.Outputs.FromPipeline(nameof(AuthorPipeline)).ParallelSelectAsync(doc =>
+                            Task.Run(() => XperienceDocumentConverter.ToTreeNode<Author>(doc))).Result
+                    }
+                )),
                 new SetDestination(Config.FromDocument((doc, ctx) => {
                     return new NormalizedPath("index.html");
                 }))

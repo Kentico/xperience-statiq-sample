@@ -1,11 +1,20 @@
-﻿<div class="jumbotron jumbotron-fluid hero">
+﻿@model HomeViewModel
+<div class="jumbotron jumbotron-fluid hero">
     <div class="container-fluid">
         <h2 class="display-4 text-center">Lorem Ipsum</h2>
         <p class="lead text-center">Dolor sit amet.</p>
         <hr class="my-4">
         <div class="text-center">
             <p>Sed vitae tempor enim. Phasellus odio nisl, interdum pulvinar a, interdum non enim. Curabitur eget odio id enim consectetur molestie. Maecenas rutrum, ipsum non.</p>
-            <a class="btn btn-primary btn-lg" href="/authors/jimmy_john.html" role="button">Go to Jimmy</a>
+            <a class="btn btn-primary btn-lg" href="/books" role="button">Books</a>
+            @if(Model.Books != null) foreach (Book book in Model.Books)
+            {
+                <p>@book.Title</p>
+            }
+            @if (Model.Authors != null) foreach (Author author in Model.Authors)
+                {
+                <p>@author.FirstName</p>
+            }
         </div>
     </div>
 </div>
