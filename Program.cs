@@ -4,6 +4,7 @@ using Statiq.Common;
 using Statiq.Core;
 using Statiq.Web;
 
+[assembly: CMS.AssemblyDiscoverable]
 namespace StatiqGenerator
 {
     class Program

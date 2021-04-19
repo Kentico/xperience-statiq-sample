@@ -1,4 +1,10 @@
-﻿@model Book
+﻿@model BookWithReviews
 
-<h1>@Model.Title</h1>
-<img src="@Model.Fields.Cover.FirstOrDefault().GetStatiqPath()" />
+<h1>@Model.Book.Title</h1>
+<img src="@Model.Book.Fields.Cover.FirstOrDefault().GetStatiqPath()" />
+<ul>
+    @foreach (var rating in Model.Ratings)
+    {
+        <li>@rating.UserName (@rating.Rating)</li>
+    }
+</ul>

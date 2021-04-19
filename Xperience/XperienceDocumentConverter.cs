@@ -1,4 +1,5 @@
-﻿using CMS.DataEngine;
+﻿using CMS.CustomTables;
+using CMS.DataEngine;
 using CMS.DocumentEngine;
 using Statiq.Common;
 using System.Collections.Generic;
@@ -17,6 +18,17 @@ namespace StatiqGenerator
             }
 
             return baseInfo;
+        }
+
+        public static TItemType ToCustomTableItem<TItemType>(IDocument doc, string className)
+            where TItemType : CustomTableItem, new() {
+            var item = CustomTableItem.New<TItemType>(className, dataRow: null);
+            foreach(var prop in item.Properties)
+            {
+                item.SetValue(prop, doc.Get(prop));
+            }
+
+            return item;
         }
 
         public static IDocument FromBaseInfo(IExecutionContext context, BaseInfo info)

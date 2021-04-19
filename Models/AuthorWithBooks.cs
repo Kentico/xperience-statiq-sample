@@ -6,8 +6,8 @@ namespace StatiqGenerator
 {
     public class AuthorWithBooks
     {
-        public Author Author { get; set; }
-        public IEnumerable<Book> Books { get; set; }
+        public Author Author { get; private set; }
+        public IEnumerable<Book> Books { get; private set; }
 
         public AuthorWithBooks(Author author, IEnumerable<Book> allBooks)
         {
