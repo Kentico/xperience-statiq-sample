@@ -26,7 +26,7 @@ namespace StatiqGenerator
 
         private void DownloadAttachment(DocumentAttachment attachment)
         {
-            var fileName = $"input{Constants.AttachmentPath}{attachment.AttachmentName}";
+            var fileName = $"input{StatiqHelper.AttachmentPath}/{attachment.AttachmentName}";
             var binary = AttachmentBinaryHelper.GetAttachmentBinary(attachment);
             BinaryWriter writer = new BinaryWriter(new FileStream(fileName, FileMode.Create));
             writer.Write(binary);

@@ -18,13 +18,17 @@ namespace StatiqGenerator
 
             ProcessModules = new ModuleList {
                 new RenderRazor().WithModel(Config.FromDocument((doc, context) =>
-                    new HomeViewModel() {
-                        Books = context.Outputs.FromPipeline(nameof(BookPipeline)).ParallelSelectAsync(doc =>
-                            Task.Run(() => XperienceDocumentConverter.ToTreeNode<Book>(doc))).Result,
+                {
+                    var allBooks = context.Outputs.FromPipeline(nameof(BookPipeline)).ParallelSelectAsync(doc =>
+                        Task.Run(() => XperienceDocumentConverter.ToTreeNode<Book>(doc))).Result;
+                    return new HomeViewModel() {
                         Authors = context.Outputs.FromPipeline(nameof(AuthorPipeline)).ParallelSelectAsync(doc =>
-                            Task.Run(() => XperienceDocumentConverter.ToTreeNode<Author>(doc))).Result
-                    }
-                )),
+                        {
+                            var author = XperienceDocumentConverter.ToTreeNode<Author>(doc);
+                            return Task.Run(() => new AuthorWithBooks(author, allBooks));
+                        })
+                    };
+                })),
                 new SetDestination(Config.FromDocument((doc, ctx) => {
                     return new NormalizedPath("index.html");
                 }))

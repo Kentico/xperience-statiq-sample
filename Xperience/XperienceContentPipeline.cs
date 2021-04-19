@@ -63,9 +63,9 @@ namespace StatiqGenerator
             };
         }
 
-        public HashSet<string> Dependencies { get; set; }
+        public HashSet<string> Dependencies { get; set; } = new HashSet<string>();
 
-        public HashSet<string> DependencyOf { get; set; }
+        public HashSet<string> DependencyOf { get; set; } = new HashSet<string>();
 
         public bool Isolated { get; set; }
         public bool Deployment { get; set; }

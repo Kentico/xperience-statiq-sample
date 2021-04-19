@@ -12,7 +12,7 @@ namespace StatiqGenerator
             DestinationPath = Config.FromDocument((doc, ctx) =>
             {
                 var book = XperienceDocumentConverter.ToTreeNode<Book>(doc);
-                return new NormalizedPath($"books/{book.Title}.html");
+                return new NormalizedPath($"books/{book.NodeAlias}.html".ToLower());
             });
         }
     }

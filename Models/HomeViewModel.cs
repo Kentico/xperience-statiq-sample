@@ -1,11 +1,10 @@
-﻿using CMS.DocumentEngine.Types.Statiq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace StatiqGenerator
 {
     public class HomeViewModel
     {
-        public IEnumerable<Book> Books { get; set; }
-        public IEnumerable<Author> Authors { get; set; }
+        public Task<IEnumerable<AuthorWithBooks>> Authors { get; set; }
     }
 }

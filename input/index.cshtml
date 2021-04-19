@@ -7,14 +7,16 @@
         <div class="text-center">
             <p>Sed vitae tempor enim. Phasellus odio nisl, interdum pulvinar a, interdum non enim. Curabitur eget odio id enim consectetur molestie. Maecenas rutrum, ipsum non.</p>
             <a class="btn btn-primary btn-lg" href="/books" role="button">Books</a>
-            @if(Model.Books != null) foreach (Book book in Model.Books)
-            {
-                <p>@book.Title</p>
-            }
-            @if (Model.Authors != null) foreach (Author author in Model.Authors)
+            @foreach (AuthorWithBooks awb in Model.Authors.Result)
                 {
-                <p>@author.FirstName</p>
-            }
+                    <p>@awb.Author.FirstName</p>
+                    <ul>
+                        @foreach (var book in awb.Books)
+                        {
+                            <li><a href="@StatiqHelper.GetBookUrl(book)">@book.Title</a></li>
+                        }
+                    </ul>
+                }
         </div>
     </div>
 </div>

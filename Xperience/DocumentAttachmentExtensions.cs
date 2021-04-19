@@ -6,7 +6,7 @@ namespace StatiqGenerator
     {
         public static string GetStatiqPath(this DocumentAttachment attachment)
         {
-            return $"{Constants.AttachmentPath}{attachment.AttachmentName}";
+            return $"{StatiqHelper.AttachmentPath}/{attachment.AttachmentName}";
         }
     }
 }
