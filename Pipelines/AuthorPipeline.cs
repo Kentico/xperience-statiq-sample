@@ -8,7 +8,7 @@ namespace StatiqGenerator
     {
         public AuthorPipeline()
         {
-            Dependencies.AddRange(nameof(BookPipeline));
+            Dependencies.Add(nameof(BookPipeline));
             Query = AuthorProvider.GetAuthors();
             ReadPath = "content/author.cshtml";
             DestinationPath = Config.FromDocument((doc, ctx) =>
