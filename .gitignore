@@ -6,3 +6,4 @@ wwwroot
 app.config
 *.user
 .vs
+.vscode

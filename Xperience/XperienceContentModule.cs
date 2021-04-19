@@ -33,7 +33,7 @@ namespace StatiqGenerator
             }
 
             var items = await Task.Run(() => Query.TypedResult);
-            return items.Select(i => XperienceDocumentConverter.FromTreeNode(context, i));
+            return items.Select(i => XperienceDocumentConverter.FromBaseInfo(context, i));
         }
     }
 }

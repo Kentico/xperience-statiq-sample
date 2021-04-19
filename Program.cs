@@ -14,6 +14,7 @@ namespace StatiqGenerator
             return await Bootstrapper
                 .Factory
                 .CreateDefault(args)
+                .AddPipeline<RatingPipeline>()
                 .AddPipeline<BookPipeline>()
                 .AddPipeline<AuthorPipeline>()
                 .AddPipeline("Assets", outputModules: new IModule[] { new CopyFiles("assets/**") })

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StatiqGenerator
 {
-    public class XperienceAttachmentDownloader : ParallelModule
+    public class XperienceAttachmentDownloader : Module
     {
         public XperienceAttachmentDownloader()
         {
@@ -31,6 +31,7 @@ namespace StatiqGenerator
             BinaryWriter writer = new BinaryWriter(new FileStream(fileName, FileMode.Create));
             writer.Write(binary);
             writer.Flush();
+            writer.Close();
         }
     }
 }

@@ -19,11 +19,11 @@ namespace StatiqGenerator
             return baseInfo;
         }
 
-        public static IDocument FromTreeNode(IExecutionContext context, TreeNode node)
+        public static IDocument FromBaseInfo(IExecutionContext context, BaseInfo info)
         {
             var metadata = new List<KeyValuePair<string, object>>();
-            metadata.AddRange(node.Properties.Select(
-                 key => new KeyValuePair<string, object>(key, node.GetValue(key))
+            metadata.AddRange(info.Properties.Select(
+                 key => new KeyValuePair<string, object>(key, info.GetValue(key))
              ));
             
             return context.CreateDocument(metadata);
