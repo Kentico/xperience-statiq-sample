@@ -1,22 +1,27 @@
 ﻿@model HomeViewModel
 <div class="jumbotron jumbotron-fluid hero">
     <div class="container-fluid">
-        <h2 class="display-4 text-center">Lorem Ipsum</h2>
-        <p class="lead text-center">Dolor sit amet.</p>
+        <h2 class="display-4 text-center">Welcome to our store!</h2>
+        <p class="lead text-center">
+            Stay a while and listen
+            <br/><a class="btn btn-primary btn-lg" href='@($"{StatiqHelper.BookPath}.html")' role="button">See all books</a>
+        </p>
         <hr class="my-4">
         <div class="text-center">
-            <p>Sed vitae tempor enim. Phasellus odio nisl, interdum pulvinar a, interdum non enim. Curabitur eget odio id enim consectetur molestie. Maecenas rutrum, ipsum non.</p>
-            <a class="btn btn-primary btn-lg" href="/books" role="button">Books</a>
-            @foreach (AuthorWithBooks awb in Model.Authors.Result)
-                {
-                    <p>@awb.Author.FirstName</p>
-                    <ul>
-                        @foreach (var book in awb.Books)
-                        {
-                            <li><a href="@StatiqHelper.GetBookUrl(book)">@book.Title</a></li>
-                        }
-                    </ul>
-                }
+            <p>We've got a great collection of books, and we're getting more every day! Check out these popular choices
+                among our reviewers:</p>
+        </div>
+        <br/><div class="row text-center">
+            @foreach (var book in Model.TopThreeBooks)
+            {
+                <div class="col-sm text-center">
+                    <a href="@StatiqHelper.GetBookUrl(book.Book)">
+                        <img style="max-width:40%" class="img-fluid" src="@book.Book.Fields.Cover.FirstOrDefault().GetStatiqPath()" />
+                    </a>
+                    <h3>@book.Book.Title</h3>
+                    @Html.Partial("_partials/_rating.cshtml", book)
+                </div>
+            }
         </div>
     </div>
 </div>

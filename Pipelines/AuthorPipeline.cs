@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using CMS.CustomTables.Types.Statiq;
 using CMS.DocumentEngine.Types.Statiq;
 using Statiq.Common;
 
@@ -8,7 +10,7 @@ namespace StatiqGenerator
     {
         public AuthorPipeline()
         {
-            Dependencies.Add(nameof(BookPipeline));
+            Dependencies.AddRange(nameof(BookPipeline), nameof(RatingPipeline));
             Query = AuthorProvider.GetAuthors();
             ReadPath = "content/author.cshtml";
             DestinationPath = Config.FromDocument((doc, ctx) =>
@@ -19,8 +21,12 @@ namespace StatiqGenerator
             WithModel = Config.FromDocument((doc, context) => {
                 var author = XperienceDocumentConverter.ToTreeNode<Author>(doc);
                 var allBooks = context.Outputs.FromPipeline(nameof(BookPipeline)).ParallelSelectAsync(doc =>
-                    Task.Run(() => XperienceDocumentConverter.ToTreeNode<Book>(doc)));
-                return new AuthorWithBooks(author, allBooks.Result);
+                        Task.Run(() => XperienceDocumentConverter.ToTreeNode<Book>(doc))).Result;
+                var allRatings = context.Outputs.FromPipeline(nameof(RatingPipeline)).ParallelSelectAsync(doc =>
+                        Task.Run(() => XperienceDocumentConverter.ToCustomTableItem<RatingsItem>(doc, RatingsItem.CLASS_NAME)));
+                var booksWithReviews = allBooks.Select(b => new BookWithReviews(b, allRatings.Result));
+                
+                return new AuthorWithBooks(author, booksWithReviews);
             });
         }
     }

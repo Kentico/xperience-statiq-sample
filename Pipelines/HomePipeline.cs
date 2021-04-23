@@ -1,7 +1,11 @@
-﻿using CMS.DocumentEngine.Types.Statiq;
+﻿using CMS.CustomTables.Types.Statiq;
+using CMS.DocumentEngine.Types.Statiq;
 using Statiq.Common;
 using Statiq.Core;
 using Statiq.Razor;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace StatiqGenerator
@@ -10,10 +14,10 @@ namespace StatiqGenerator
     {
         public HomePipeline()
         {
-            Dependencies.AddRange(nameof(AuthorPipeline), nameof(BookPipeline));
+            Dependencies.AddRange(nameof(BookPipeline), nameof(RatingPipeline));
             InputModules = new ModuleList
             {
-                new ReadFiles(patterns: "index.cshtml")
+                new ReadFiles("index.cshtml")
             };
 
             ProcessModules = new ModuleList {
@@ -21,12 +25,12 @@ namespace StatiqGenerator
                 {
                     var allBooks = context.Outputs.FromPipeline(nameof(BookPipeline)).ParallelSelectAsync(doc =>
                         Task.Run(() => XperienceDocumentConverter.ToTreeNode<Book>(doc))).Result;
+                    var allRatings = context.Outputs.FromPipeline(nameof(RatingPipeline)).ParallelSelectAsync(doc =>
+                        Task.Run(() => XperienceDocumentConverter.ToCustomTableItem<RatingsItem>(doc, RatingsItem.CLASS_NAME)));
+                    var booksWithReviews = allBooks.Select(b => new BookWithReviews(b, allRatings.Result));
+
                     return new HomeViewModel() {
-                        Authors = context.Outputs.FromPipeline(nameof(AuthorPipeline)).ParallelSelectAsync(doc =>
-                        {
-                            var author = XperienceDocumentConverter.ToTreeNode<Author>(doc);
-                            return Task.Run(() => new AuthorWithBooks(author, allBooks));
-                        })
+                        TopThreeBooks = booksWithReviews.OrderByDescending(b => b.AverageRating).Take(3)
                     };
                 })),
                 new SetDestination(Config.FromDocument((doc, ctx) => {

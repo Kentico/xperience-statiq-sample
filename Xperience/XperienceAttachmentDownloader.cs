@@ -16,7 +16,7 @@ namespace StatiqGenerator
         protected override async Task<IEnumerable<IDocument>> ExecuteInputAsync(IDocument input, IExecutionContext context)
         {
             var node = XperienceDocumentConverter.ToTreeNode<TreeNode>(input);
-            foreach(var attachment in node.AllAttachments)
+            foreach (var attachment in node.AllAttachments)
             {
                 await Task.Run(() => DownloadAttachment(attachment));
             }
@@ -27,11 +27,14 @@ namespace StatiqGenerator
         private void DownloadAttachment(DocumentAttachment attachment)
         {
             var fileName = $"input{StatiqHelper.AttachmentPath}/{attachment.AttachmentName}";
-            var binary = AttachmentBinaryHelper.GetAttachmentBinary(attachment);
-            BinaryWriter writer = new BinaryWriter(new FileStream(fileName, FileMode.Create));
-            writer.Write(binary);
-            writer.Flush();
-            writer.Close();
+            if (!File.Exists(fileName))
+            {
+                var binary = AttachmentBinaryHelper.GetAttachmentBinary(attachment);
+                BinaryWriter writer = new BinaryWriter(new FileStream(fileName, FileMode.Create));
+                writer.Write(binary);
+                writer.Flush();
+                writer.Close();
+            }
         }
     }
 }

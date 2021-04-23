@@ -1,0 +1,14 @@
+@model BookWithReviews
+<script>
+    $(function () {
+        console.log('setting rating');
+        $("#rating-book-@Model.Book.NodeID").rateYo({
+            rating: @Model.AverageRating,
+            starWidth: "15px",
+            readonly: true
+        });
+    });
+</script>
+<div class="flex">
+    <div id="rating-book-@Model.Book.NodeID"></div> (@Model.Ratings.Count())
+</div>

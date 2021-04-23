@@ -6,6 +6,7 @@ namespace StatiqGenerator
     public class StatiqHelper
     {
         public const string BookPath = "/books";
+        public const string AuthorPath = "/authors";
         public const string AttachmentPath = "/assets/attachments";
 
         public static string GetBookUrl(Book book)
