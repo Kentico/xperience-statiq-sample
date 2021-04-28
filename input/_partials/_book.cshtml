@@ -1,0 +1,16 @@
+@model BookWithReviews
+@{
+    var category = Model.Book.Category.Replace(" ", "-");
+    var imageUrl = @Model.Book.Fields.Cover.FirstOrDefault().GetStatiqPath();
+}
+
+<div class="col-2 portfolio-item filter-@category">
+    <div class="portfolio-wrap">
+        <img src="@imageUrl" class="img-fluid" alt="">
+        <div class="portfolio-links">
+            <a href="@imageUrl" data-gall="bookGallery" class="venobox" title="@Model.Book.Title"><i
+                    class="bx bx-zoom-in"></i></a>
+            <a href="book-details.html" title="Book Details"><i class="bx bx-chevrons-right"></i></a>
+        </div>
+    </div>
+</div>

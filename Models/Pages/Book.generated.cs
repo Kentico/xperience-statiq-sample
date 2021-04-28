@@ -80,6 +80,23 @@ namespace CMS.DocumentEngine.Types.Statiq
 
 
 		/// <summary>
+		/// Category.
+		/// </summary>
+		[DatabaseField]
+		public string Category
+		{
+			get
+			{
+				return ValidationHelper.GetString(GetValue("Category"), @"");
+			}
+			set
+			{
+				SetValue("Category", value);
+			}
+		}
+
+
+		/// <summary>
 		/// Cover.
 		/// </summary>
 		[DatabaseField]
@@ -164,18 +181,6 @@ namespace CMS.DocumentEngine.Types.Statiq
 
 
 			/// <summary>
-			/// Cover.
-			/// </summary>
-			public IEnumerable<DocumentAttachment> Cover
-			{
-				get
-				{
-					return mInstance.GetFieldDocumentAttachments("Cover");
-				}
-			}
-
-
-			/// <summary>
 			/// Author.
 			/// </summary>
 			public IEnumerable<TreeNode> Author
@@ -183,6 +188,34 @@ namespace CMS.DocumentEngine.Types.Statiq
 				get
 				{
 					return mInstance.GetRelatedDocuments("Author");
+				}
+			}
+
+
+			/// <summary>
+			/// Category.
+			/// </summary>
+			public string Category
+			{
+				get
+				{
+					return mInstance.Category;
+				}
+				set
+				{
+					mInstance.Category = value;
+				}
+			}
+
+
+			/// <summary>
+			/// Cover.
+			/// </summary>
+			public IEnumerable<DocumentAttachment> Cover
+			{
+				get
+				{
+					return mInstance.GetFieldDocumentAttachments("Cover");
 				}
 			}
 		}

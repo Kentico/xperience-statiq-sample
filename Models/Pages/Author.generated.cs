@@ -97,6 +97,40 @@ namespace CMS.DocumentEngine.Types.Statiq
 
 
 		/// <summary>
+		/// Category.
+		/// </summary>
+		[DatabaseField]
+		public string Category
+		{
+			get
+			{
+				return ValidationHelper.GetString(GetValue("Category"), @"");
+			}
+			set
+			{
+				SetValue("Category", value);
+			}
+		}
+
+
+		/// <summary>
+		/// Bio.
+		/// </summary>
+		[DatabaseField]
+		public string Bio
+		{
+			get
+			{
+				return ValidationHelper.GetString(GetValue("Bio"), @"");
+			}
+			set
+			{
+				SetValue("Bio", value);
+			}
+		}
+
+
+		/// <summary>
 		/// Gets an object that provides extended API for working with Author fields.
 		/// </summary>
 		[RegisterProperty]
@@ -175,6 +209,38 @@ namespace CMS.DocumentEngine.Types.Statiq
 				set
 				{
 					mInstance.LastName = value;
+				}
+			}
+
+
+			/// <summary>
+			/// Category.
+			/// </summary>
+			public string Category
+			{
+				get
+				{
+					return mInstance.Category;
+				}
+				set
+				{
+					mInstance.Category = value;
+				}
+			}
+
+
+			/// <summary>
+			/// Bio.
+			/// </summary>
+			public string Bio
+			{
+				get
+				{
+					return mInstance.Bio;
+				}
+				set
+				{
+					mInstance.Bio = value;
 				}
 			}
 		}

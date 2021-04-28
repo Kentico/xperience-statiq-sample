@@ -1,0 +1,42 @@
+@model IEnumerable<BookWithReviews>
+@{
+    var categories = new string[]{
+        "Fiction",
+        "Non-Fiction",
+        "Mystery",
+        "Graphic-Novel",
+        "Fantasy",
+        "Sci-Fi"
+    };
+}
+<section id="books" class="portfolio section-bg">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Our books</h2>
+            <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
+                consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat
+                sit in iste officiis commodi quidem hic quas.</p>
+        </div>
+
+        <div class="row" data-aos="fade-up">
+            <div class="col-lg-12 d-flex justify-content-center">
+                <ul id="portfolio-flters">
+                    <li data-filter="*" class="filter-active">All</li>
+                    @foreach (var c in categories)
+                    {
+                        <li data-filter=".filter-@c">@c</li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <div class="row portfolio-container justify-content-around" data-aos="fade-up" data-aos-delay="100">
+            @foreach (var book in Model)
+            {
+                @Html.Partial("/_partials/_book.cshtml", book)
+            }
+        </div>
+
+    </div>
+</section>
