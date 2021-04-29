@@ -15,7 +15,7 @@ namespace StatiqGenerator
             DestinationPath = Config.FromDocument((doc, ctx) =>
             {
                 var book = XperienceDocumentConverter.ToTreeNode<Book>(doc);
-                return new NormalizedPath($"books/{book.NodeAlias}.html".ToLower());
+                return new NormalizedPath(StatiqHelper.GetBookUrl(book));
             });
             WithModel = Config.FromDocument((doc, context) => {
                 var book = XperienceDocumentConverter.ToTreeNode<Book>(doc);

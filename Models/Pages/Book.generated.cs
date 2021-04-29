@@ -114,6 +114,23 @@ namespace CMS.DocumentEngine.Types.Statiq
 
 
 		/// <summary>
+		/// Synopsis.
+		/// </summary>
+		[DatabaseField]
+		public string Synopsis
+		{
+			get
+			{
+				return ValidationHelper.GetString(GetValue("Synopsis"), @"");
+			}
+			set
+			{
+				SetValue("Synopsis", value);
+			}
+		}
+
+
+		/// <summary>
 		/// Gets an object that provides extended API for working with Book fields.
 		/// </summary>
 		[RegisterProperty]
@@ -216,6 +233,22 @@ namespace CMS.DocumentEngine.Types.Statiq
 				get
 				{
 					return mInstance.GetFieldDocumentAttachments("Cover");
+				}
+			}
+
+
+			/// <summary>
+			/// Synopsis.
+			/// </summary>
+			public string Synopsis
+			{
+				get
+				{
+					return mInstance.Synopsis;
+				}
+				set
+				{
+					mInstance.Synopsis = value;
 				}
 			}
 		}

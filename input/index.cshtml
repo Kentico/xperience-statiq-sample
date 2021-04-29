@@ -9,6 +9,23 @@
 </head>
 
 <body>
+
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl float-right w-100 mr-5">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
     @Html.Partial("_partials/_menu")
 
@@ -39,6 +56,7 @@
     <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
     <script src="assets/vendor/typed.js/typed.min.js"></script>
     <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/kartik-rating/js/star-rating.js"></script>
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
