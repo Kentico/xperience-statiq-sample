@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace StatiqGenerator
 {
+    /// <summary>
+    /// When included in <see cref="IPipeline.PostProcessModules">, downloads all page attachments
+    /// to the the input folder at the path indicated by <see cref="StatiqHelper.AttachmentPath">
+    /// </summary>
     public class XperienceAttachmentDownloader : Module
     {
         public XperienceAttachmentDownloader()
@@ -14,7 +18,7 @@ namespace StatiqGenerator
 
         }
 
-        #pragma warning disable 1998
+#pragma warning disable 1998
         protected override async Task<IEnumerable<IDocument>> ExecuteInputAsync(IDocument input, IExecutionContext context)
         {
             var node = XperienceDocumentConverter.ToTreeNode<TreeNode>(input);
@@ -25,14 +29,15 @@ namespace StatiqGenerator
 
             return input.Yield();
         }
-        #pragma warning restore 1998
+#pragma warning restore 1998
 
         private void DownloadAttachment(DocumentAttachment attachment)
         {
             var fileName = $"input{StatiqHelper.AttachmentPath}/{attachment.AttachmentName}";
             if (!File.Exists(fileName))
             {
-                var thread = new CMSThread(() => {
+                var thread = new CMSThread(() =>
+                {
                     var binary = AttachmentBinaryHelper.GetAttachmentBinary(attachment);
                     BinaryWriter writer = new BinaryWriter(new FileStream(fileName, FileMode.Create));
                     writer.Write(binary);

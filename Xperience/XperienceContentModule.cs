@@ -9,8 +9,9 @@ using Module = Statiq.Common.Module;
 namespace StatiqGenerator
 {
     /// <summary>
-    /// An InputModule which accepts a <see cref="DocumentQuery"/> and executes the query. The output of the
-    /// <see cref="Module"/> is list of <see cref="IDocument"/> objects containing the properties of the nodes.
+    /// A module used in <see cref="IPipeline.InputModules"> which accepts a <see cref="DocumentQuery"/>
+    /// and executes the query. The output of the module is a list of <see cref="IDocument"/>
+    /// objects containing the properties of the nodes.
     /// </summary>
     /// <typeparam name="TPageType">A strongly-typed class which extends <see cref="TreeNode"/>, or just <see cref="TreeNode"/>
     /// for generic queries</typeparam>
@@ -27,7 +28,7 @@ namespace StatiqGenerator
 
         protected override async Task<IEnumerable<IDocument>> ExecuteContextAsync(IExecutionContext context)
         {
-            if(Query == null)
+            if (Query == null)
             {
                 throw new NullReferenceException($"{nameof(XperienceContentModule<TPageType>)} missing query, pass a DocumentQuery in the constructor to retrieve pages from your Xperience project.");
             }

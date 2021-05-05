@@ -7,17 +7,32 @@ using System.Collections.Generic;
 namespace StatiqGenerator
 {
     /// <summary>
-    /// A Pipeline which outputs multiple documents at the <see cref="DestinationPath"/> after processing
-    /// the Razor view file at <see cref="ReadPath"/>
+    /// A Pipeline which retrieves pages from the content tree. Optionally, if other properties are
+    /// provided, it outputs multiple documents at the <see cref="DestinationPath"/> after processing
+    /// the Razor view file at <see cref="ReadPath"/> with the model provided in <see cref="WithModel">
     /// </summary>
     /// <typeparam name="TPageType">A strongly-typed class which extends <see cref="TreeNode"/>, or just <see cref="TreeNode"/>
     /// for generic pages</typeparam>
-    class XperienceContentPipeline<TPageType> : IXperiencePipeline where TPageType : TreeNode, new()
+    class XperienceContentPipeline<TPageType> : IPipeline where TPageType : TreeNode, new()
     {
+        /// <summary>
+        /// A path relative to the /input folder which contains the Razor view for processing
+        /// </summary>
         public string ReadPath { get; set; }
+
         public DocumentQuery<TPageType> Query { get; set; }
+
+        /// <summary>
+        /// A full path to the desired output of the pages in the /output folder. Use
+        /// <see cref="Config.FromDocument(IDocument, IExecutionContext)"> to provide dynamic paths.
+        /// </summary>
         public Config<NormalizedPath> DestinationPath { get; set; }
 
+        /// <summary>
+        /// Optional property to customize the model passed to the input Razor file. Use
+        /// <see cref="Config.FromDocument(IDocument, IExecutionContext)"> to access the document.
+        /// If not provided, the strongly-typed document is passed.
+        /// </summary>
         public Config<object> WithModel { get; set; } = Config.FromDocument((doc, context) => XperienceDocumentConverter.ToTreeNode<TPageType>(doc));
 
         public XperienceContentPipeline()
@@ -32,7 +47,8 @@ namespace StatiqGenerator
                 var list = new ModuleList {
                     new XperienceContentModule<TPageType>(Query)
                 };
-                if(DestinationPath != null) {
+                if (DestinationPath != null)
+                {
                     list.Add(new SetDestination(DestinationPath));
                 }
 

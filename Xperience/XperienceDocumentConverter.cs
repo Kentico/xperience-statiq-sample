@@ -7,6 +7,10 @@ using System.Linq;
 
 namespace StatiqGenerator
 {
+    /// <summary>
+    /// Helper class which converts Xperience objects to Statiq <see cref="IDocument"> objects,
+    /// and vice-versa.
+    /// </summary>
     public class XperienceDocumentConverter
     {
         public static BaseInfo ToBaseInfo(IDocument doc, string objectType)

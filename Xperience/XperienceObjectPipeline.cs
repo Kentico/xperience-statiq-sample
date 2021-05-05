@@ -5,8 +5,10 @@ using Statiq.Common;
 
 namespace StatiqGenerator
 {
-
-    class XperienceObjectPipeline<TObjectType> : IXperiencePipeline where TObjectType : BaseInfo, new()
+    ///<summary>
+    /// A pipeline which retrieves objects from the database and performs no additional processing.
+    ///</summary>
+    class XperienceObjectPipeline<TObjectType> : IPipeline where TObjectType : BaseInfo, new()
     {
         public ObjectQuery<TObjectType> Query { get; set; }
 
