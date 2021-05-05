@@ -27,21 +27,33 @@ namespace StatiqGenerator
 
         public ModuleList InputModules
         {
-            get => new ModuleList {
-                new XperienceContentModule<TPageType>(Query),
-                new SetDestination(DestinationPath)
-            };
+            get
+            {
+                var list = new ModuleList {
+                    new XperienceContentModule<TPageType>(Query)
+                };
+                if(DestinationPath != null) {
+                    list.Add(new SetDestination(DestinationPath));
+                }
+
+                return list;
+            }
         }
 
         public ModuleList PostProcessModules
         {
-            get => new ModuleList {
-                new XperienceAttachmentDownloader(),
-                new MergeContent(
-                    new ReadFiles(patterns: ReadPath)
-                ),
-                new RenderRazor().WithModel(WithModel)
-            };
+            get
+            {
+                var list = new ModuleList {
+                        new XperienceAttachmentDownloader()
+                    };
+                if (ReadPath != null) list.Add(new MergeContent(
+                         new ReadFiles(patterns: ReadPath)
+                     ));
+                if (WithModel != null) list.Add(new RenderRazor().WithModel(WithModel));
+
+                return list;
+            }
         }
 
         public ModuleList ProcessModules { get; set; }
