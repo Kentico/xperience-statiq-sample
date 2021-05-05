@@ -14,7 +14,7 @@ namespace StatiqGenerator
     {
         public HomePipeline()
         {
-            Dependencies.AddRange(nameof(BookPipeline), nameof(RatingPipeline), nameof(AuthorPipeline));
+            Dependencies.AddRange(nameof(BookPipeline), nameof(RatingPipeline), nameof(AuthorPipeline), nameof(ContactPipeline));
             InputModules = new ModuleList
             {
                 new ReadFiles("index.cshtml")
@@ -23,20 +23,18 @@ namespace StatiqGenerator
             ProcessModules = new ModuleList {
                 new RenderRazor().WithModel(Config.FromDocument((doc, context) =>
                 {
-                    var allBooks = context.Outputs.FromPipeline(nameof(BookPipeline)).ParallelSelectAsync(doc =>
-                        Task.Run(() => XperienceDocumentConverter.ToTreeNode<Book>(doc))).Result;
-                    var allAuthors = context.Outputs.FromPipeline(nameof(AuthorPipeline)).ParallelSelectAsync(doc =>
-                        Task.Run(() => XperienceDocumentConverter.ToTreeNode<Author>(doc))).Result;
-                    var allRatings = context.Outputs.FromPipeline(nameof(RatingPipeline)).ParallelSelectAsync(doc =>
-                        Task.Run(() => XperienceDocumentConverter.ToCustomTableItem<RatingsItem>(doc, RatingsItem.CLASS_NAME)));
+                    var allBooks = XperienceDocumentConverter.ToTreeNodes<Book>(context.Outputs.FromPipeline(nameof(BookPipeline)));
+                    var allAuthors = XperienceDocumentConverter.ToTreeNodes<Author>(context.Outputs.FromPipeline(nameof(AuthorPipeline)));
+                    var allRatings = XperienceDocumentConverter.ToCustomTableItems<RatingsItem>(context.Outputs.FromPipeline(nameof(RatingPipeline)), RatingsItem.CLASS_NAME);
                     
-                    var booksWithReviews = allBooks.Select(b => new BookWithReviews(b, allRatings.Result));
+                    var contactInfo = XperienceDocumentConverter.ToTreeNodes<ContactUs>(context.Outputs.FromPipeline(nameof(ContactPipeline))).FirstOrDefault();
+                    var booksWithReviews = allBooks.Select(b => new BookWithReviews(b, allRatings));
                     var authorsWithBooks = allAuthors.Select(a => new AuthorWithBooks(a, booksWithReviews));
 
                     return new HomeViewModel() {
                         Authors = authorsWithBooks,
                         Books = booksWithReviews,
-                        TopThreeBooks = booksWithReviews.OrderByDescending(b => b.AverageRating).Take(3)
+                        ContactInfo = contactInfo
                     };
                 })),
                 new SetDestination(Config.FromDocument((doc, ctx) => {

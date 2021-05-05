@@ -18,6 +18,7 @@ namespace StatiqGenerator
                 .AddPipeline<RatingPipeline>()
                 .AddPipeline<BookPipeline>()
                 .AddPipeline<AuthorPipeline>()
+                .AddPipeline<ContactPipeline>()
                 .AddPipeline("Assets", outputModules: new IModule[] { new CopyFiles("assets/**") })
                 .AddHostingCommands()
                 .RunAsync();

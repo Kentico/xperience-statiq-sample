@@ -1,8 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using CMS.CustomTables.Types.Statiq;
-using CMS.DocumentEngine.Types.Statiq;
-using Statiq.Common;
+﻿using CMS.DocumentEngine.Types.Statiq;
 
 namespace StatiqGenerator
 {

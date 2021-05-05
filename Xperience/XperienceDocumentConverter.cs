@@ -12,7 +12,7 @@ namespace StatiqGenerator
         public static BaseInfo ToBaseInfo(IDocument doc, string objectType)
         {
             var baseInfo = ModuleManager.GetObject(objectType);
-            foreach(var prop in baseInfo.Properties)
+            foreach (var prop in baseInfo.Properties)
             {
                 baseInfo.SetValue(prop, doc.Get(prop));
             }
@@ -20,15 +20,26 @@ namespace StatiqGenerator
             return baseInfo;
         }
 
+        public static IEnumerable<BaseInfo> ToBaseInfos(IEnumerable<IDocument> docs, string objectType)
+        {
+            return docs.Select(doc => ToBaseInfo(doc, objectType));
+        }
+
         public static TItemType ToCustomTableItem<TItemType>(IDocument doc, string className)
-            where TItemType : CustomTableItem, new() {
+            where TItemType : CustomTableItem, new()
+        {
             var item = CustomTableItem.New<TItemType>(className, dataRow: null);
-            foreach(var prop in item.Properties)
+            foreach (var prop in item.Properties)
             {
                 item.SetValue(prop, doc.Get(prop));
             }
 
             return item;
+        }
+
+        public static IEnumerable<TItemType> ToCustomTableItems<TItemType>(IEnumerable<IDocument> docs, string className) where TItemType : CustomTableItem, new()
+        {
+            return docs.Select(doc => ToCustomTableItem<TItemType>(doc, className));
         }
 
         public static IDocument FromBaseInfo(IExecutionContext context, BaseInfo info)
@@ -37,8 +48,13 @@ namespace StatiqGenerator
             metadata.AddRange(info.Properties.Select(
                  key => new KeyValuePair<string, object>(key, info.GetValue(key))
              ));
-            
+
             return context.CreateDocument(metadata);
+        }
+
+        public static IEnumerable<TPageType> ToTreeNodes<TPageType>(IEnumerable<IDocument> docs) where TPageType : TreeNode, new()
+        {
+            return docs.Select(doc => ToTreeNode<TPageType>(doc));
         }
 
         public static TPageType ToTreeNode<TPageType>(IDocument doc) where TPageType : TreeNode, new()

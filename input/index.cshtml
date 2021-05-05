@@ -39,7 +39,7 @@
     <main id="main">
         @Html.Partial("sections/_authors.cshtml", Model.Authors)
         @Html.Partial("sections/_books.cshtml", Model.Books)
-        @Html.Partial("sections/_contact.cshtml")
+        @Html.Partial("sections/_contact.cshtml", Model.ContactInfo)
     </main>
 
     @Html.Partial("_partials/_footer")

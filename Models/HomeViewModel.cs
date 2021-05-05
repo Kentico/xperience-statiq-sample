@@ -1,9 +1,12 @@
 using System.Collections.Generic;
+using CMS.DocumentEngine.Types.Statiq;
 
-namespace StatiqGenerator {
-    public class HomeViewModel {
-        public IEnumerable<BookWithReviews> TopThreeBooks { get; set; }
+namespace StatiqGenerator
+{
+    public class HomeViewModel
+    {
         public IEnumerable<AuthorWithBooks> Authors { get; set; }
         public IEnumerable<BookWithReviews> Books { get; set; }
+        public ContactUs ContactInfo { get; set; }
     }
 }

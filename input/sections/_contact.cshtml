@@ -1,11 +1,10 @@
+@model ContactUs
 <section id="contact" class="contact">
     <div class="container">
 
         <div class="section-title">
             <h2>Contact</h2>
-            <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
-                consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat
-                sit in iste officiis commodi quidem hic quas.</p>
+            <p>@Html.Raw(Model.Message)</p>
         </div>
 
         <div class="row" data-aos="fade-in">
@@ -15,24 +14,24 @@
                     <div class="address">
                         <i class="icofont-google-map"></i>
                         <h4>Location:</h4>
-                        <p>Nové sady 25, 602 00 Brno-střed, Czechia</p>
+                        <p>@Model.Location</p>
                     </div>
 
                     <div class="email">
                         <i class="icofont-envelope"></i>
                         <h4>Email:</h4>
-                        <p>support@@xperience.io</p>
+                        <p>@Model.Email</p>
                     </div>
 
                     <div class="phone">
                         <i class="icofont-phone"></i>
                         <h4>Call:</h4>
-                        <p>+420-511-180-800</p>
+                        <p>@Model.Phone</p>
                     </div>
 
                     <div style="overflow:hidden">
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2607.6703794021!2d16.604448015436837!3d49.18784108540731!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471294ff640fe9f7%3A0xc64382bead8d587a!2sKentico%20Software!5e0!3m2!1sen!2sus!4v1619642295311!5m2!1sen!2sus"
+                        src="@Model.MapUrl"
                         width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     </div>
                 </div>
