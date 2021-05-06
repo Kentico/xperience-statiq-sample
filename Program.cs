@@ -5,6 +5,7 @@ using Statiq.App;
 using Statiq.Common;
 using Statiq.Core;
 using Statiq.Web;
+using CMS.Core;
 
 [assembly: CMS.AssemblyDiscoverable]
 namespace StatiqGenerator
@@ -13,6 +14,7 @@ namespace StatiqGenerator
     {
         public static async Task<int> Main(string[] args)
         {
+            Service.InitializeContainer();
             ConnectionHelper.ConnectionString = Environment.GetEnvironmentVariable("CMSConnectionString");
             CMSApplication.Init();
             return await Bootstrapper
