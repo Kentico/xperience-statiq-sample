@@ -9,7 +9,7 @@ on:
 jobs:
   build:
 
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -18,6 +18,6 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Build
-      run: dotnet build StatiqGenerator.csproj
+      run: dotnet build StatiqGenerator.csproj -r win-x64 --configuration ReleaseComplete
     - name: Run dotnet
       run: dotnet run --project StatiqGenerator.csproj
