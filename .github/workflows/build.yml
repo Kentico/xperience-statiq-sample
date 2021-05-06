@@ -23,5 +23,5 @@ jobs:
       run: dotnet run --project StatiqGenerator.csproj
       env:
         CMSConnectionString: ${{ secrets.CMSConnectionString }}
-        NETLIFY_SITE: ${{ NETLIFY_SITE }}
-        NETLIFY_KEY: ${{ NETLIFY_KEY }}
+        NETLIFY_SITE: ${{ secrets.NETLIFY_SITE }}
+        NETLIFY_KEY: ${{ secrets.NETLIFY_KEY }}
