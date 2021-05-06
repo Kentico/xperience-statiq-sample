@@ -19,3 +19,5 @@ jobs:
         dotnet-version: 5.0.x
     - name: Build
       run: dotnet build StatiqGenerator.csproj
+    - name: Run dotnet
+      run: dotnet run --project StatiqGenerator.csproj
