@@ -10,7 +10,7 @@
             <img src="@imageUrl" class="img-fluid" alt="">
         </div>
         <div class="col"></div>
-        <div class="col col-lg-7 text-left">
+        <div class="col col-lg-7 col-sm-12 text-left">
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                     <a class="nav-link active" id="nav-summary-tab" data-toggle="tab" href="#nav-summary" role="tab"
@@ -43,23 +43,7 @@
                 <div class="tab-pane fade" id="nav-reviews" role="tabpanel" aria-labelledby="nav-reviews-tab">
                     <p class="mb-2 font-weight-bold">Leave a review</p>
                     <div class="col mb-5">
-                        <form>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="name">Username</label>
-                                    <input type="text" name="name" class="form-control" id="name" data-rule="minlen:4"
-                                        data-msg="Please enter at least 4 chars" />
-                                    <div class="validate"></div>
-                                </div>
-                            </div>
-                            <div class="form-group mr-5">
-                                <label for="name">Message</label>
-                                <textarea class="form-control" name="message" rows="3" data-rule="required"
-                                    data-msg="Please write something for us"></textarea>
-                                <div class="validate"></div>
-                            </div>
-                            <button type="button" class="btn btn-primary">Submit</button>
-                        </form>
+                        @Html.Partial("_partials/_ratingform.cshtml")
                     </div>
                     <p class="mb-2 font-weight-bold">What other readers think:</p>
                     @foreach (var rating in Model.Ratings)

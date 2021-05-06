@@ -22,6 +22,27 @@
         emptyStar: '<i class="bx bxs-star"></i>',
         filledStar: '<i class="bx bxs-star"></i>',
       });
+      $('form').submit(function () {
+        /*$.ajax({
+            url: 'http://statiqcms/rest/customtableitem.statiq.ratings?format=json',
+            method: 'POST',
+            headers: {
+              "Authorization": "Basic YWRtaW5pc3RyYXRvcjo="
+            },
+            contentType: 'text/plain',
+            data: "",//$(this).serialize()
+        });*/
+        var promise = fetch('http://statiqcms/rest/customtableitem.statiq.ratings?format=json', {
+          method: 'POST',
+          headers: {
+            "Authorization": "Basic YWRtaW5pc3RyYXRvcjo=",
+            "Content-Type": "application/json"
+          },
+          body: "",
+          mode: "cors"
+        }).then((result) => console.log(result));
+        return false;
+    });
     });
     return false;
   });

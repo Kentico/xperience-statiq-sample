@@ -1,0 +1,18 @@
+@using (Html.BeginForm())
+{
+    <div class="form-row">
+        <div class="form-group">
+            <label for="name">Username</label>
+            <input type="text" name="name" class="form-control" id="UserName" data-rule="minlen:4"
+            data-msg="Please enter at least 4 chars" />
+            <div class="validate"></div>
+        </div>
+    </div>
+    <div class="form-group mr-5">
+        <label for="name">Message</label>
+        <textarea id="Comment" class="form-control" name="message" rows="3" data-rule="required"
+        data-msg="Please write something for us"></textarea>
+        <div class="validate"></div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+}
