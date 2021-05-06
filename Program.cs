@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Statiq.App;
 using Statiq.Common;
 using Statiq.Core;
@@ -11,6 +12,7 @@ namespace StatiqGenerator
     {
         public static async Task<int> Main(string[] args)
         {
+            Console.WriteLine(Environment.GetEnvironmentVariable("CMSConnectionString"));
             CMS.DataEngine.CMSApplication.Init();
             return await Bootstrapper
                 .Factory
