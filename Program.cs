@@ -14,26 +14,23 @@ namespace StatiqGenerator
     {
         public static async Task<int> Main(string[] args)
         {
+            CMSApplication.PreInit(true);
+
             // Connect to external database
             var connString = Environment.GetEnvironmentVariable("CMSConnectionString");
-            IDataConnection conn = DataConnectionFactory.GetNativeConnection(connString);
-            using (var scope = new CMSConnectionScope(conn).Open())
-            {
-                CMSApplication.Init();
-                var result = await Bootstrapper
-                    .Factory
-                    .CreateDefault(args)
-                    .AddPipeline<RatingPipeline>()
-                    .AddPipeline<BookPipeline>()
-                    .AddPipeline<AuthorPipeline>()
-                    .AddPipeline<ContactPipeline>()
-                    .AddPipeline("Assets", outputModules: new IModule[] { new CopyFiles("assets/**") })
-                    .AddHostingCommands()
-                    .RunAsync();
-                scope.Close();
-                return result;
-            }
+            ConnectionHelper.ConnectionString = connString;
 
+            CMSApplication.Init();
+            return await Bootstrapper
+                .Factory
+                .CreateDefault(args)
+                .AddPipeline<RatingPipeline>()
+                .AddPipeline<BookPipeline>()
+                .AddPipeline<AuthorPipeline>()
+                .AddPipeline<ContactPipeline>()
+                .AddPipeline("Assets", outputModules: new IModule[] { new CopyFiles("assets/**") })
+                .AddHostingCommands()
+                .RunAsync();
         }
     }
 }
