@@ -4,6 +4,8 @@ output
 temp
 wwwroot
 app.config
+appsettings.json
 *.user
 .vs
 .vscode
+.env

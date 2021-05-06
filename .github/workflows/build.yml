@@ -20,7 +20,7 @@ jobs:
     - name: Build
       run: dotnet build StatiqGenerator.csproj
     - name: Deploy
-      run: dotnet run --project StatiqGenerator.csproj
+      run: dotnet run --project StatiqGenerator.csproj -- deploy
       env:
         CMSConnectionString: ${{ secrets.CMSConnectionString }}
         NETLIFY_SITE: ${{ secrets.NETLIFY_SITE }}

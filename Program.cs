@@ -5,7 +5,6 @@ using Statiq.App;
 using Statiq.Common;
 using Statiq.Core;
 using Statiq.Web;
-using CMS.Core;
 
 [assembly: CMS.AssemblyDiscoverable]
 namespace StatiqGenerator
