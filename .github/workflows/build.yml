@@ -19,7 +19,9 @@ jobs:
         dotnet-version: 5.0.x
     - name: Build
       run: dotnet build StatiqGenerator.csproj
-    - name: Run dotnet
+    - name: Deploy
       run: dotnet run --project StatiqGenerator.csproj
       env:
         CMSConnectionString: ${{ secrets.CMSConnectionString }}
+        NETLIFY_SITE: ${{ NETLIFY_SITE }}
+        NETLIFY_KEY: ${{ NETLIFY_KEY }}
