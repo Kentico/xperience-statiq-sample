@@ -19,9 +19,9 @@ jobs:
         dotnet-version: 5.0.x
     - name: Build
       run: dotnet build StatiqGenerator.csproj
-    - name: Deploy
-      run: dotnet run --project StatiqGenerator.csproj -- deploy
-      env:
-        CMSConnectionString: ${{ secrets.CMSConnectionString }}
-        NETLIFY_SITE: ${{ secrets.NETLIFY_SITE }}
-        NETLIFY_KEY: ${{ secrets.NETLIFY_KEY }}
+#    - name: Deploy
+#      run: dotnet run --project StatiqGenerator.csproj -- deploy
+#      env:
+#        CMSConnectionString: ${{ secrets.CMSConnectionString }}
+#        NETLIFY_SITE: ${{ secrets.NETLIFY_SITE }}
+#        NETLIFY_KEY: ${{ secrets.NETLIFY_KEY }}
