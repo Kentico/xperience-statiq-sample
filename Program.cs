@@ -5,6 +5,7 @@ using Statiq.App;
 using Statiq.Common;
 using Statiq.Core;
 using Statiq.Web;
+using System.Collections.Generic;
 
 [assembly: CMS.AssemblyDiscoverable]
 namespace StatiqGenerator
@@ -28,10 +29,11 @@ namespace StatiqGenerator
                 .AddPipeline<AuthorPipeline>()
                 .AddPipeline<ContactPipeline>()
                 .AddPipeline("Assets", outputModules: new IModule[] { new CopyFiles("assets/**") })
-                .DeployToNetlify(
-                    Environment.GetEnvironmentVariable("NETLIFY_SITE"),
-                    Environment.GetEnvironmentVariable("NETLIFY_KEY")
-                )
+                .AddSettingsIfNonExisting(new Dictionary<string, object>
+                {
+                    { WebKeys.NetlifySiteId, Environment.GetEnvironmentVariable("NETLIFY_SITE") },
+                    { WebKeys.NetlifyAccessToken, Environment.GetEnvironmentVariable("NETLIFY_KEY") }
+                })
                 .RunAsync();
         }
     }
