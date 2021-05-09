@@ -29,12 +29,6 @@ namespace StatiqGenerator
                 .AddPipeline<AuthorPipeline>()
                 .AddPipeline<ContactPipeline>()
                 .AddPipeline("Assets", outputModules: new IModule[] { new CopyFiles("assets/**") })
-                .DeployToGitHubPages(
-                    "kentico-ericd",
-                    "xperience-statiq-sample",
-                    Config.FromSetting<string>("GITHUB_TOKEN"),
-                    "master"
-                )
                 .RunAsync();
         }
     }

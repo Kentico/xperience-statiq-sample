@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  deploy:
 
     runs-on: windows-latest
 
@@ -19,8 +19,12 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.100
-    - name: Deploy
-      run: dotnet run -- deploy
+    - name: Build
+      run: dotnet run
       env:
         CMSConnectionString: ${{ secrets.CMSConnectionString }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.1
+        with:
+          branch: master
+          folder: output
