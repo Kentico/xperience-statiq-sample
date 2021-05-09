@@ -28,10 +28,9 @@ namespace StatiqGenerator
                 .AddPipeline<AuthorPipeline>()
                 .AddPipeline<ContactPipeline>()
                 .AddPipeline("Assets", outputModules: new IModule[] { new CopyFiles("assets/**") })
-                .AddHostingCommands()
                 .DeployToNetlify(
-                    Environment.GetEnvironmentVariable("NETLIFY_SITE"),
-                    Environment.GetEnvironmentVariable("NETLIFY_KEY")
+                    Environment.GetEnvironmentVariable("NETLIFY_SITE", EnvironmentVariableTarget.Process),
+                    Environment.GetEnvironmentVariable("NETLIFY_KEY", EnvironmentVariableTarget.Process)
                 )
                 .RunAsync();
         }
