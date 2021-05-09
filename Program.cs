@@ -22,15 +22,15 @@ namespace StatiqGenerator
             CMSApplication.Init();
             return await Bootstrapper
                 .Factory
-                .CreateDefault(args)
+                .CreateWeb(args)
                 .AddPipeline<RatingPipeline>()
                 .AddPipeline<BookPipeline>()
                 .AddPipeline<AuthorPipeline>()
                 .AddPipeline<ContactPipeline>()
                 .AddPipeline("Assets", outputModules: new IModule[] { new CopyFiles("assets/**") })
                 .DeployToNetlify(
-                    Environment.GetEnvironmentVariable("NETLIFY_SITE", EnvironmentVariableTarget.Process),
-                    Environment.GetEnvironmentVariable("NETLIFY_KEY", EnvironmentVariableTarget.Process)
+                    Environment.GetEnvironmentVariable("NETLIFY_SITE"),
+                    Environment.GetEnvironmentVariable("NETLIFY_KEY")
                 )
                 .RunAsync();
         }
