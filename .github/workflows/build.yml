@@ -23,8 +23,15 @@ jobs:
       run: dotnet run
       env:
         CMSConnectionString: ${{ secrets.CMSConnectionString }}
-    - name: Deploy
+    - name: Deploy to GitHub
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./output
+    - name: 'Deploy to Netlify'
+      uses: jsmrcaga/action-netlify-deploy@v1.1.0
+      with:
+        build_directory: output
+        NETLIFY_SITE_ID: ${{ secrets.NetlifySiteId }}
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NetlifyAccessToken }}
+        NETLIFY_DEPLOY_TO_PROD: true
