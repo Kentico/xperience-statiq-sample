@@ -1,4 +1,4 @@
-name: .NET 5 CI
+name: Statiq CI
 
 on:
   push:
@@ -19,10 +19,8 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.100
-    - name: Build
-      run: dotnet build StatiqGenerator.csproj
     - name: Deploy
-      run: dotnet run --project StatiqGenerator.csproj --no-build -- deploy
+      run: dotnet run -- deploy
       env:
         CMSConnectionString: ${{ secrets.CMSConnectionString }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

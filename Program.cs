@@ -23,7 +23,7 @@ namespace StatiqGenerator
             CMSApplication.Init();
             return await Bootstrapper
                 .Factory
-                .CreateDefault(args, DefaultFeatures.All)
+                .CreateDefault(args)
                 .AddPipeline<RatingPipeline>()
                 .AddPipeline<BookPipeline>()
                 .AddPipeline<AuthorPipeline>()
