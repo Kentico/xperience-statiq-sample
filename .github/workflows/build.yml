@@ -9,7 +9,7 @@ on:
 jobs:
   deploy:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@master
@@ -24,7 +24,7 @@ jobs:
       env:
         CMSConnectionString: ${{ secrets.CMSConnectionString }}
     - name: Deploy
-      uses: JamesIves/github-pages-deploy-action@4.1.1
+      uses: peaceiris/actions-gh-pages@v3
       with:
-        branch: master
-        folder: output
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./output
