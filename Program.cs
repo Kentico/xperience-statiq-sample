@@ -29,10 +29,10 @@ namespace StatiqGenerator
                 .AddPipeline<ContactPipeline>()
                 .AddPipeline("Assets", outputModules: new IModule[] { new CopyFiles("assets/**") })
                 .AddHostingCommands()
-                /*.DeployToNetlify(
+                .DeployToNetlify(
                     Environment.GetEnvironmentVariable("NETLIFY_SITE"),
                     Environment.GetEnvironmentVariable("NETLIFY_KEY")
-                )*/
+                )
                 .RunAsync();
         }
     }
