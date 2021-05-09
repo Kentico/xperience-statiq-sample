@@ -23,5 +23,5 @@ jobs:
       run: dotnet run --project StatiqGenerator.csproj --no-build -- deploy
       env:
         CMSConnectionString: ${{ secrets.CMSConnectionString }}
-        NETLIFY_SITE: ${{ secrets.NETLIFY_SITE }}
-        NETLIFY_KEY: ${{ secrets.NETLIFY_KEY }}
+        NetlifySiteId: ${{ secrets.NetlifySiteId }}
+        NetlifyAccessToken: ${{ secrets.NetlifyAccessToken }}

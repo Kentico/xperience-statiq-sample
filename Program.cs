@@ -23,17 +23,16 @@ namespace StatiqGenerator
             CMSApplication.Init();
             return await Bootstrapper
                 .Factory
-                .CreateDefault(args)
+                .CreateDefault(args, DefaultFeatures.All)
                 .AddPipeline<RatingPipeline>()
                 .AddPipeline<BookPipeline>()
                 .AddPipeline<AuthorPipeline>()
                 .AddPipeline<ContactPipeline>()
                 .AddPipeline("Assets", outputModules: new IModule[] { new CopyFiles("assets/**") })
-                .AddSettingsIfNonExisting(new Dictionary<string, object>
-                {
-                    { WebKeys.NetlifySiteId, Environment.GetEnvironmentVariable("NETLIFY_SITE") },
-                    { WebKeys.NetlifyAccessToken, Environment.GetEnvironmentVariable("NETLIFY_KEY") }
-                })
+                .DeployToNetlify(
+                    Environment.GetEnvironmentVariable("NetlifySiteId"),
+                    Environment.GetEnvironmentVariable("NetlifyAccessToken")
+                )
                 .RunAsync();
         }
     }
