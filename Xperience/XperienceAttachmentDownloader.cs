@@ -39,6 +39,7 @@ namespace StatiqGenerator
             {
                 var thread = new CMSThread(() =>
                 {
+                    Directory.CreateDirectory(fileName);
                     var binary = AttachmentBinaryHelper.GetAttachmentBinary(attachment);
                     BinaryWriter writer = new BinaryWriter(new FileStream(fileName, FileMode.Create));
                     writer.Write(binary);
