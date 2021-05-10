@@ -10,6 +10,7 @@ jobs:
   deploy:
 
     runs-on: windows-latest
+    permissions: read-all|write-all
 
     steps:
     - uses: actions/checkout@master
