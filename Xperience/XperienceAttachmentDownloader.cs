@@ -34,7 +34,7 @@ namespace StatiqGenerator
 
         private void DownloadAttachment(DocumentAttachment attachment)
         {
-            var fileName = $"input{StatiqHelper.AttachmentPath}/{attachment.AttachmentName}";
+            var fileName = $"output{StatiqHelper.AttachmentPath}/{attachment.AttachmentName}";
             if (!File.Exists(fileName))
             {
                 var thread = new CMSThread(() =>
@@ -44,7 +44,6 @@ namespace StatiqGenerator
                     writer.Write(binary);
                     writer.Flush();
                     writer.Close();
-                    Console.WriteLine($"wrote file {fileName}");
                 });
                 thread.Start();
             }
