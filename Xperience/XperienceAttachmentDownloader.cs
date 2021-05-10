@@ -41,10 +41,8 @@ namespace StatiqGenerator
             {
                 var thread = new CMSThread(() =>
                 {
-                    var writePermission = new FileIOPermission(FileIOPermissionAccess.Write, fileName);
                     try
                     {
-                        writePermission.Demand();
                         Directory.CreateDirectory(fileName);
                         var binary = AttachmentBinaryHelper.GetAttachmentBinary(attachment);
                         BinaryWriter writer = new BinaryWriter(new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite));
