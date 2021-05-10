@@ -44,18 +44,18 @@ namespace StatiqGenerator
                     // Try set permissions
                     var permissionSet = new PermissionSet(PermissionState.None);
                     var writePermission = new FileIOPermission(FileIOPermissionAccess.Write, fileName);
-                    permissionSet.AddPermission(writePermission);
-                    
-                    if (permissionSet.IsSubsetOf(AppDomain.CurrentDomain.PermissionSet))
+                    try
                     {
-                        Console.WriteLine("Permission granted");
+                        writePermission.Demand();
                         var binary = AttachmentBinaryHelper.GetAttachmentBinary(attachment);
                         BinaryWriter writer = new BinaryWriter(new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite));
                         writer.Write(binary);
                         writer.Flush();
                         writer.Close();
                     }
-                    else Console.WriteLine("Permission denied");
+                    catch(Exception e) {
+                        Console.WriteLine(e.Message);
+                    }
                 });
                 thread.Start();
             }
