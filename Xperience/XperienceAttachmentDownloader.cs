@@ -46,6 +46,7 @@ namespace StatiqGenerator
                     var writePermission = new FileIOPermission(FileIOPermissionAccess.Write, fileName);
                     try
                     {
+                        Directory.CreateDirectory(fileName);
                         writePermission.Demand();
                         var binary = AttachmentBinaryHelper.GetAttachmentBinary(attachment);
                         BinaryWriter writer = new BinaryWriter(new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite));
