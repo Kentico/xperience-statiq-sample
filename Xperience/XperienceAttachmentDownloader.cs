@@ -4,6 +4,8 @@ using Statiq.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Security;
+using System.Security.Permissions;
 using System.Threading.Tasks;
 
 namespace StatiqGenerator
@@ -39,12 +41,21 @@ namespace StatiqGenerator
             {
                 var thread = new CMSThread(() =>
                 {
-                    Directory.CreateDirectory(fileName);
-                    var binary = AttachmentBinaryHelper.GetAttachmentBinary(attachment);
-                    BinaryWriter writer = new BinaryWriter(new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite));
-                    writer.Write(binary);
-                    writer.Flush();
-                    writer.Close();
+                    // Try set permissions
+                    var permissionSet = new PermissionSet(PermissionState.None);
+                    var writePermission = new FileIOPermission(FileIOPermissionAccess.Write, fileName);
+                    permissionSet.AddPermission(writePermission);
+                    
+                    if (permissionSet.IsSubsetOf(AppDomain.CurrentDomain.PermissionSet))
+                    {
+                        Console.WriteLine("Permission granted");
+                        var binary = AttachmentBinaryHelper.GetAttachmentBinary(attachment);
+                        BinaryWriter writer = new BinaryWriter(new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite));
+                        writer.Write(binary);
+                        writer.Flush();
+                        writer.Close();
+                    }
+                    else Console.WriteLine("Permission denied");
                 });
                 thread.Start();
             }
