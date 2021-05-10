@@ -36,18 +36,16 @@ namespace StatiqGenerator
 
         private void DownloadAttachment(DocumentAttachment attachment)
         {
-            var fileName = $"input{StatiqHelper.AttachmentPath}/{attachment.AttachmentName}";
+            var fileName = $"output{StatiqHelper.AttachmentPath}/{attachment.AttachmentName}";
             if (!File.Exists(fileName))
             {
                 var thread = new CMSThread(() =>
                 {
-                    // Try set permissions
-                    var permissionSet = new PermissionSet(PermissionState.None);
                     var writePermission = new FileIOPermission(FileIOPermissionAccess.Write, fileName);
                     try
                     {
-                        Directory.CreateDirectory(fileName);
                         writePermission.Demand();
+                        Directory.CreateDirectory(fileName);
                         var binary = AttachmentBinaryHelper.GetAttachmentBinary(attachment);
                         BinaryWriter writer = new BinaryWriter(new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite));
                         writer.Write(binary);
