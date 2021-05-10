@@ -36,7 +36,7 @@ namespace StatiqGenerator
 
         private void DownloadAttachment(DocumentAttachment attachment)
         {
-            var fileName = $"output{StatiqHelper.AttachmentPath}/{attachment.AttachmentName}";
+            var fileName = $"input{StatiqHelper.AttachmentPath}/{attachment.AttachmentName}";
             if (!File.Exists(fileName))
             {
                 var thread = new CMSThread(() =>
