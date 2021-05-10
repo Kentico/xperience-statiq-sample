@@ -1,6 +1,7 @@
 ﻿using CMS.Base;
 using CMS.DocumentEngine;
 using Statiq.Common;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -43,6 +44,7 @@ namespace StatiqGenerator
                     writer.Write(binary);
                     writer.Flush();
                     writer.Close();
+                    Console.WriteLine($"wrote file {fileName}");
                 });
                 thread.Start();
             }
