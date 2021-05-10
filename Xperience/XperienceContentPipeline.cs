@@ -56,13 +56,21 @@ namespace StatiqGenerator
             }
         }
 
+        public ModuleList ProcessModules
+        {
+            get
+            {
+                return new ModuleList {
+                    new XperienceAttachmentDownloader()
+                };
+            }
+        }
+
         public ModuleList PostProcessModules
         {
             get
             {
-                var list = new ModuleList {
-                        new XperienceAttachmentDownloader()
-                    };
+                var list = new ModuleList();
                 if (ReadPath != null) list.Add(new MergeContent(
                          new ReadFiles(patterns: ReadPath)
                      ));
@@ -71,8 +79,6 @@ namespace StatiqGenerator
                 return list;
             }
         }
-
-        public ModuleList ProcessModules { get; set; }
 
         public ModuleList OutputModules
         {
