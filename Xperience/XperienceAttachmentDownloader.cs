@@ -41,7 +41,7 @@ namespace StatiqGenerator
                 {
                     Directory.CreateDirectory(fileName);
                     var binary = AttachmentBinaryHelper.GetAttachmentBinary(attachment);
-                    BinaryWriter writer = new BinaryWriter(new FileStream(fileName, FileMode.Create));
+                    BinaryWriter writer = new BinaryWriter(new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite));
                     writer.Write(binary);
                     writer.Flush();
                     writer.Close();
