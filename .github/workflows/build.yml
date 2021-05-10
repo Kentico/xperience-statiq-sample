@@ -9,8 +9,7 @@ on:
 jobs:
   deploy:
 
-    runs-on: ubuntu-latest
-    permissions: write-all
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@master
