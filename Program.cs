@@ -24,6 +24,7 @@ namespace StatiqGenerator
             return await Bootstrapper
                 .Factory
                 .CreateDefault(args)
+                .AddSetting("LinkRoot", "/xperience-statiq-sample/")
                 .AddPipeline<RatingPipeline>()
                 .AddPipeline<BookPipeline>()
                 .AddPipeline<AuthorPipeline>()
