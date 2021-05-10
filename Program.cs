@@ -28,7 +28,7 @@ namespace StatiqGenerator
                 .AddPipeline<BookPipeline>()
                 .AddPipeline<AuthorPipeline>()
                 .AddPipeline<ContactPipeline>()
-                .AddPipeline("Assets", outputModules: new IModule[] { new CopyFiles("assets/**") }, dependencies: new string[] { nameof(BookPipeline) })
+                .AddPipeline("Assets", outputModules: new IModule[] { new CopyFiles("assets/**") })
                 .RunAsync();
         }
     }
