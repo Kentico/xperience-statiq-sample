@@ -174,3 +174,20 @@ public class TriggerGitHubAction : DocumentWorkflowAction
 	}
 }
 ```
+
+## :memo: Handling user interaction
+
+> __Warning__ This is only a proof-of-concept! Do not store your credentials in javascript files, even if they are Base64 encoded. If you use this approach, you will need to find a way to secure the REST endpoint and prevent spam
+
+You can find an example form in the _Reviews_ section of each book:
+
+![ratingform](form.png)
+
+The form submit action is handled in [main.js](https://github.com/kentico-ericd/xperience-statiq-sample/blob/master/input/assets/js/main.js#L38). The form data is gathered and posted to the Xperience REST endpoint. The request must be authenticated using Basic authentication, with the Base64 encoded username and password of an Xperience user (the values have been removed from this repository):
+
+```js
+headers: {
+    "Authorization": "Basic <username:password>",
+    "Content-Type": "application/json",
+},
+```
