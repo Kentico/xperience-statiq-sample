@@ -36,7 +36,7 @@ namespace StatiqGenerator
 
         private void DownloadAttachment(DocumentAttachment attachment, IExecutionContext context)
         {
-            var fileName = $"output{StatiqHelper.AttachmentPath}/{attachment.AttachmentName}";
+            var fileName = $"{StatiqHelper.AttachmentPath}/{attachment.AttachmentName}";
             var destination = context.FileSystem.GetOutputFile(fileName);
             if (!destination.Exists)
             {
@@ -52,10 +52,6 @@ namespace StatiqGenerator
                             long length = fileStream.Position - initialPosition;
                             fileStream.SetLength(length);
                         }
-                        //BinaryWriter writer = new BinaryWriter(new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite));
-                        //writer.Write(binary);
-                        //writer.Flush();
-                        //writer.Close();
                     }
                     catch(Exception e) {
                         Console.WriteLine(e.Message);
