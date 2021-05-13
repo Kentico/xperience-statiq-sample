@@ -36,7 +36,7 @@ namespace StatiqGenerator
 
         private void DownloadAttachment(DocumentAttachment attachment, IExecutionContext context)
         {
-            var fileName = $"{StatiqHelper.AttachmentPath}/{attachment.AttachmentName}";
+            var fileName = $"output/{StatiqHelper.AttachmentPath}/{attachment.AttachmentName}";
             var destination = context.FileSystem.GetOutputFile(fileName);
             if (!destination.Exists)
             {
