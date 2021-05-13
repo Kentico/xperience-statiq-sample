@@ -134,9 +134,43 @@ public ModuleList ProcessModules
 1. Fork this repo
 1. Set these GitHub Secrets in __Settings__:
     - CMSConnectionString: the connection to your Xperience database
-    - personal_token: your [Personal Access Token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token)
+    - personal_token: your [Personal Access Token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token) with `repo` and `workflow` permissions
 1. Modify `build.yml`:
     - external_repository: the name of your GitHub User Pages
     - publish_branch: desired branch to publish to
 
 On a successful push (e.g. on step 4), the GitHub Action will run the Console application, get data from your Xperience database, generate the static HTML, and deploy it to your User Pages.
+
+## :recycle: Automatically rebuilding the site
+
+The static website is only rebuilt when there is a push to GitHub, so what happens when an editor adds a new page to the content tree? We want that new page to appear on the site, but we can't expect developers to manually run the GitHub action every time pages are created or updated!
+
+To resolve this problem, we can create a [custom workflow action](https://docs.xperience.io/configuring-xperience/configuring-the-environment-for-content-editors/configuring-workflows/designing-advanced-workflows/creating-custom-action-workflow-steps). Using workflow scopes, we can then apply a workflow to every page in the content tree that contains our custom step.
+
+```cs
+public class TriggerGitHubAction : DocumentWorkflowAction
+{
+	private const string PERSONAL_TOKEN = "<your personal token>";
+	private const string REPOSITORY = "<your GitHub user>/<statiq repostiory>";
+	private const string WORKFLOW = "build.yml";
+
+	public override void Execute()
+	{
+		var url = $"https://api.github.com/repos/{REPOSITORY}/actions/workflows/{WORKFLOW}/dispatches";
+		var client = new HttpClient();
+		client.DefaultRequestHeaders.Add("User-Agent", "Kentico-Xperience");
+		client.DefaultRequestHeaders.Add("Authorization", $"Bearer {PERSONAL_TOKEN}");
+		client.DefaultRequestHeaders.Add("Accept", "application/vnd.github.v3+json");
+		var body = new Dictionary<string,string>() {
+			{ "ref", "master" }
+		};
+
+		var response = client.PostAsJsonAsync(url, body).Result;
+		if (response.StatusCode != HttpStatusCode.OK)
+		{
+			var logService = Service.Resolve<IEventLogService>();
+			logService.LogWarning(nameof(TriggerGitHubAction), "EXECUTE", response.Content.ReadAsStringAsync().Result);
+		}
+	}
+}
+```
