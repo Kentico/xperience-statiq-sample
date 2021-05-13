@@ -24,13 +24,14 @@
       });
       $("form").submit(function () {
         fetch(
-          "https://ericd-statiq.azurewebsites.net/rest/customtableitem.statiq.ratings?format=json&hashexpirationutc=2022-06-13T18:23:38.0000000Z&hash=86f0d5cbdd22b9293f675fe8f5afeb1da7ff7ad16a65d23d9a78a579513e0129",
+          "https://ericd-statiq.azurewebsites.net/rest/customtableitem.statiq.ratings?format=json",
           {
             method: "POST",
             headers: {
+              "Authorization": "Basic YWRtaW5pc3RyYXRvcjpTVEFUaXFUZXN0MTEyIQ==",
               "Content-Type": "application/json",
             },
-            body: ""
+            body: $(this).serialize()
           }
         ).then((result) => console.log(result));
         return false;
