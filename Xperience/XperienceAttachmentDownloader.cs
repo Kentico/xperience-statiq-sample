@@ -27,28 +27,35 @@ namespace StatiqGenerator
             var node = XperienceDocumentConverter.ToTreeNode<TreeNode>(input);
             foreach (var attachment in node.AllAttachments)
             {
-                DownloadAttachment(attachment);
+                DownloadAttachment(attachment, context);
             }
 
             return input.Yield();
         }
 #pragma warning restore 1998
 
-        private void DownloadAttachment(DocumentAttachment attachment)
+        private void DownloadAttachment(DocumentAttachment attachment, IExecutionContext context)
         {
             var fileName = $"output{StatiqHelper.AttachmentPath}/{attachment.AttachmentName}";
-            if (!File.Exists(fileName))
+            var destination = context.FileSystem.GetOutputFile(fileName);
+            if (!destination.Exists)
             {
                 var thread = new CMSThread(() =>
                 {
                     try
                     {
-                        Directory.CreateDirectory(fileName);
                         var binary = AttachmentBinaryHelper.GetAttachmentBinary(attachment);
-                        BinaryWriter writer = new BinaryWriter(new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite));
-                        writer.Write(binary);
-                        writer.Flush();
-                        writer.Close();
+                        using (Stream fileStream = destination.OpenWrite(true))
+                        {
+                            long initialPosition = fileStream.Position;
+                            fileStream.Write(binary, 0, binary.Length);
+                            long length = fileStream.Position - initialPosition;
+                            fileStream.SetLength(length);
+                        }
+                        //BinaryWriter writer = new BinaryWriter(new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite));
+                        //writer.Write(binary);
+                        //writer.Flush();
+                        //writer.Close();
                     }
                     catch(Exception e) {
                         Console.WriteLine(e.Message);
