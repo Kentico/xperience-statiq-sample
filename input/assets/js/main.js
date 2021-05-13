@@ -4,10 +4,9 @@
  * Author: BootstrapMade.com
  * License: https://bootstrapmade.com/license/
  */
+ var currentRating;
 !(function ($) {
   "use strict";
-
-  var currentRating;
 
   // Book detail popup
   $(".book-detail").click(function () {
@@ -35,6 +34,7 @@
         filledStar: '<i class="bx bxs-star"></i>',
       }).on('rating:change', function(event, value, caption) {
           currentRating = value;
+          console.log(currentRating);
       });
       $("form").submit(function () {
         var userName = $("form #UserName").val();
