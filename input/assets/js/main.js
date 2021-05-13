@@ -33,9 +33,9 @@
               "Content-Type": "application/json",
             },
             body: {
-              UserName: formData.UserName,
-              Comment: formData.Comment,
-              Book: formData.Book
+              "UserName": formData.UserName,
+              "Comment": formData.Comment,
+              "Book": formData.Book
             }
           }
         ).then((result) => console.log(result));
