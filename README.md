@@ -6,7 +6,7 @@ Sample .NET Core console application using [Statiq](https://statiq.dev/) to gene
 
 ## :gear: How does it work?
 
-The website is built by a GitHub Action defined by [build.yml](/.github/build.yml) using `dotnet run`. When the Console application runs, it establishes a connection to the Xperience CMS website by loading the connection string from an environment variable:
+The website is built by a GitHub Action defined by [build.yml](/.github/workflows/build.yml) using `dotnet run`. When the Console application runs, it establishes a connection to the Xperience CMS website by loading the connection string from an environment variable:
 
 ```cs
 CMSApplication.PreInit(true);
