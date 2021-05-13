@@ -23,8 +23,7 @@
         filledStar: '<i class="bx bxs-star"></i>',
       });
       $("form").submit(function () {
-        var formData = $("form").serialize();
-        console.log(formData);
+        var formData = $(this).serialize();
         fetch(
           "https://ericd-statiq.azurewebsites.net/rest/customtableitem.statiq.ratings?format=json",
           {
@@ -33,11 +32,7 @@
               "Authorization": "Basic YWRtaW5pc3RyYXRvcjpTVEFUaXFUZXN0MTEyIQ==",
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-              "UserName": formData.UserName,
-              "Comment": formData.Comment,
-              "Book": formData.Book
-            })
+            body: JSON.stringify(formData)
           }
         ).then((result) => console.log(result));
         return false;
