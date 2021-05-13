@@ -36,9 +36,9 @@
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              "UserName": userName,
-              "Comment": comment,
-              "Book": book
+              UserName: userName,
+              Comment: comment,
+              Book: book
             })
           }
         ).then((result) => console.log(result));
