@@ -32,11 +32,11 @@
               "Authorization": "Basic YWRtaW5pc3RyYXRvcjpTVEFUaXFUZXN0MTEyIQ==",
               "Content-Type": "application/json",
             },
-            body: {
+            body: JSON.stringify({
               "UserName": formData.UserName,
               "Comment": formData.Comment,
               "Book": formData.Book
-            }
+            })
           }
         ).then((result) => console.log(result));
         return false;
