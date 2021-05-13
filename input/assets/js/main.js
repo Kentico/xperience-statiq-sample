@@ -12,6 +12,7 @@
     var path = $(this).attr("data-book-path");
     $(".modal-body").load(path, function () {
       $(".bd-example-modal-lg").modal();
+      // Non-editable ratings for reviews
       $(".book-rating").rating({
         showCaption: false,
         size: "xs",
@@ -22,10 +23,20 @@
         emptyStar: '<i class="bx bxs-star"></i>',
         filledStar: '<i class="bx bxs-star"></i>',
       });
+      // Editable ratings for form
+      $(".book-rating-editable").rating({
+        showCaption: false,
+        size: "xs",
+        showClear: false,
+        containerClass: "rating-container",
+        emptyStar: '<i class="bx bxs-star"></i>',
+        filledStar: '<i class="bx bxs-star"></i>',
+      });
       $("form").submit(function () {
         var userName = $("form #UserName").val();
         var comment = $("form #Comment").val();
         var book = $("form #Book").val();
+        var rating = $("form #Rating").val();
 
         fetch(
           "https://ericd-statiq.azurewebsites.net/rest/customtableitem.statiq.ratings?format=json",
@@ -36,9 +47,10 @@
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              UserName: userName,
-              Comment: comment,
-              Book: book
+              "UserName": userName,
+              "Comment": comment,
+              "Book": book,
+              "Rating": rating
             })
           }
         ).then((result) => console.log(result));

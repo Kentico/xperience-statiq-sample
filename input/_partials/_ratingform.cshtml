@@ -3,18 +3,20 @@
 {
     <div class="form-row">
         <div class="form-group">
+            <label for="Rating">Rating</label>
+            <input name="Rating" id="Rating" class="book-rating-editable">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
             <label for="UserName">Username</label>
-            <input type="text" name="UserName" class="form-control" id="UserName" data-rule="minlen:4"
-            data-msg="Please enter at least 4 chars" />
-            <div class="validate"></div>
+            <input type="text" name="UserName" class="form-control" id="UserName"/>
         </div>
     </div>
     <div class="form-row">
         <div class="form-group mr-5">
             <label for="Comment">Message</label>
-            <textarea id="Comment" class="form-control" name="Comment" rows="3" data-rule="required"
-            data-msg="Please write something for us"></textarea>
-            <div class="validate"></div>
+            <textarea id="Comment" class="form-control" name="Comment" rows="3"></textarea>
         </div>
     </div>
 
