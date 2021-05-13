@@ -23,7 +23,8 @@
         filledStar: '<i class="bx bxs-star"></i>',
       });
       $("form").submit(function () {
-        var formData = $(this).serialize();
+        var formData = $("form").serialize();
+        console.log(formData);
         fetch(
           "https://ericd-statiq.azurewebsites.net/rest/customtableitem.statiq.ratings?format=json",
           {
