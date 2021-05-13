@@ -7,6 +7,8 @@
 !(function ($) {
   "use strict";
 
+  var currentRating;
+
   // Book detail popup
   $(".book-detail").click(function () {
     var path = $(this).attr("data-book-path");
@@ -31,12 +33,13 @@
         containerClass: "rating-container",
         emptyStar: '<i class="bx bxs-star"></i>',
         filledStar: '<i class="bx bxs-star"></i>',
+      }).on('rating:change', function(event, value, caption) {
+          currentRating = value;
       });
       $("form").submit(function () {
         var userName = $("form #UserName").val();
         var comment = $("form #Comment").val();
         var book = $("form #Book").val();
-        var rating = $("form #Rating").val();
 
         fetch(
           "https://ericd-statiq.azurewebsites.net/rest/customtableitem.statiq.ratings?format=json",
@@ -50,7 +53,7 @@
               "UserName": userName,
               "Comment": comment,
               "Book": book,
-              "Rating": rating
+              "Rating": currentRating
             })
           }
         ).then((result) => console.log(result));
