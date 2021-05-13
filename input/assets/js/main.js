@@ -45,7 +45,7 @@
           {
             method: "POST",
             headers: {
-              "Authorization": "Basic YWRtaW5pc3RyYXRvcjpTVEFUaXFUZXN0MTEyIQ==",
+              "Authorization": "Basic <username:password>",
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
