@@ -83,11 +83,11 @@ namespace CMS.CustomTables.Types.Statiq
 		/// Rating.
 		/// </summary>
 		[DatabaseField]
-		public int Rating
+		public decimal Rating
 		{
 			get
 			{
-				return ValidationHelper.GetInteger(GetValue("Rating"), 0);
+				return ValidationHelper.GetDecimal(GetValue("Rating"), 0);
 			}
 			set
 			{
@@ -183,7 +183,7 @@ namespace CMS.CustomTables.Types.Statiq
 			/// <summary>
 			/// Rating.
 			/// </summary>
-			public int Rating
+			public decimal Rating
 			{
 				get
 				{

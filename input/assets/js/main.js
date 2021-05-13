@@ -34,7 +34,6 @@
         filledStar: '<i class="bx bxs-star"></i>',
       }).on('rating:change', function(event, value, caption) {
           currentRating = value;
-          console.log(currentRating);
       });
       $("form").submit(function () {
         var userName = $("form #UserName").val();

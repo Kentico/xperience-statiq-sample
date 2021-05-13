@@ -10,7 +10,7 @@ namespace StatiqGenerator
         public Author Author { get; private set; }
         public Book Book { get; private set; }
         public IEnumerable<RatingsItem> Ratings { get; private set; }
-        public double AverageRating { get; private set; }
+        public decimal AverageRating { get; private set; }
 
         public BookWithReviews(Book book, IEnumerable<RatingsItem> allRatings) {
             Book = book;
