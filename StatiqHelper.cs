@@ -1,7 +1,7 @@
 ﻿using CMS.DocumentEngine.Routing;
 using CMS.DocumentEngine.Types.Statiq;
 
-namespace StatiqGenerator
+namespace Kentico.Xperience.StatiqGenerator
 {
     public class StatiqHelper
     {

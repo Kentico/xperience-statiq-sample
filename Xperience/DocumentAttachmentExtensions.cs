@@ -1,6 +1,6 @@
 ﻿using CMS.DocumentEngine;
 
-namespace StatiqGenerator
+namespace Kentico.Xperience.StatiqGenerator
 {
     public static class DocumentAttachmentExtensions
     {

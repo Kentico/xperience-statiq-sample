@@ -1,7 +1,7 @@
 using CMS.CustomTables;
 using CMS.CustomTables.Types.Statiq;
 
-namespace StatiqGenerator
+namespace Kentico.Xperience.StatiqGenerator
 {
     class RatingPipeline : XperienceObjectPipeline<RatingsItem>
     {

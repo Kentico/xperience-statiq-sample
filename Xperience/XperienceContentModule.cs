@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Module = Statiq.Common.Module;
 
-namespace StatiqGenerator
+namespace Kentico.Xperience.StatiqGenerator
 {
     /// <summary>
     /// A module used in <see cref="IPipeline.InputModules"> which accepts a <see cref="DocumentQuery"/>

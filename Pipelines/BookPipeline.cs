@@ -3,7 +3,7 @@ using CMS.CustomTables.Types.Statiq;
 using CMS.DocumentEngine.Types.Statiq;
 using Statiq.Common;
 
-namespace StatiqGenerator
+namespace Kentico.Xperience.StatiqGenerator
 {
     class BookPipeline : XperienceContentPipeline<Book>
     {

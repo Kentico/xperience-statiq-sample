@@ -4,11 +4,9 @@ using System.Threading.Tasks;
 using Statiq.App;
 using Statiq.Common;
 using Statiq.Core;
-using Statiq.Web;
-using System.Collections.Generic;
 
 [assembly: CMS.AssemblyDiscoverable]
-namespace StatiqGenerator
+namespace Kentico.Xperience.StatiqGenerator
 {
     class Program
     {

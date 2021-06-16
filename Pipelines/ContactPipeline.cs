@@ -1,6 +1,6 @@
 using CMS.DocumentEngine.Types.Statiq;
 
-namespace StatiqGenerator
+namespace Kentico.Xperience.StatiqGenerator
 {
     class ContactPipeline : XperienceContentPipeline<ContactUs>
     {

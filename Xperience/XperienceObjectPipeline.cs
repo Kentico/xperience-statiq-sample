@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using CMS.DataEngine;
 using Statiq.Common;
 
-namespace StatiqGenerator
+namespace Kentico.Xperience.StatiqGenerator
 {
     ///<summary>
     /// A pipeline which retrieves objects from the database and performs no additional processing.

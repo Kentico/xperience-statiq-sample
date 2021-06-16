@@ -5,7 +5,7 @@ using Statiq.Common;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace StatiqGenerator
+namespace Kentico.Xperience.StatiqGenerator
 {
     /// <summary>
     /// Helper class which converts Xperience objects to Statiq <see cref="IDocument"> objects,

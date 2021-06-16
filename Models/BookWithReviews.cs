@@ -3,7 +3,7 @@ using System.Linq;
 using CMS.CustomTables.Types.Statiq;
 using CMS.DocumentEngine.Types.Statiq;
 
-namespace StatiqGenerator
+namespace Kentico.Xperience.StatiqGenerator
 {
     public class BookWithReviews
     {

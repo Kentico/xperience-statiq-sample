@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using CMS.DocumentEngine.Types.Statiq;
 
-namespace StatiqGenerator
+namespace Kentico.Xperience.StatiqGenerator
 {
     public class HomeViewModel
     {

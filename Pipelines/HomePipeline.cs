@@ -3,12 +3,9 @@ using CMS.DocumentEngine.Types.Statiq;
 using Statiq.Common;
 using Statiq.Core;
 using Statiq.Razor;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace StatiqGenerator
+namespace Kentico.Xperience.StatiqGenerator
 {
     public class HomePipeline : Pipeline
     {

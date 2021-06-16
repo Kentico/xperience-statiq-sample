@@ -4,11 +4,9 @@ using Statiq.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Security;
-using System.Security.Permissions;
 using System.Threading.Tasks;
 
-namespace StatiqGenerator
+namespace Kentico.Xperience.StatiqGenerator
 {
     /// <summary>
     /// When included in <see cref="IPipeline.PostProcessModules">, downloads all page attachments

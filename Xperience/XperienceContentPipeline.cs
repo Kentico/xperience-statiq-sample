@@ -4,7 +4,7 @@ using Statiq.Core;
 using Statiq.Razor;
 using System.Collections.Generic;
 
-namespace StatiqGenerator
+namespace Kentico.Xperience.StatiqGenerator
 {
     /// <summary>
     /// A Pipeline which retrieves pages from the content tree. Optionally, if other properties are
