@@ -1,3 +1,5 @@
+![Statiq CI](https://github.com/kentico-ericd/xperience-statiq-sample/actions/workflows/build.yml/badge.svg) ![Kentico.Xperience.Libraries 13.0.0](https://img.shields.io/badge/Kentico.Xperience.Libraries-v13.0.0-orange)
+
 # Xperience Statiq Sample Application
 
 Sample .NET Core console application using [Statiq](https://statiq.dev/) to generate a single-page application which is deployed to GitHub Pages: https://kentico-ericd.github.io/
