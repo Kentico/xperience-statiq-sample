@@ -1,4 +1,4 @@
-![Statiq CI](https://github.com/kentico-ericd/xperience-statiq-sample/actions/workflows/build.yml/badge.svg) ![Kentico.Xperience.Libraries 13.0.0](https://img.shields.io/badge/Kentico.Xperience.Libraries-v13.0.0-orange)
+![Statiq CI](https://github.com/kentico/xperience-statiq-sample/actions/workflows/build.yml/badge.svg) ![Kentico.Xperience.Libraries 13.0.0](https://img.shields.io/badge/Kentico.Xperience.Libraries-v13.0.0-orange)
 
 # Xperience Statiq Sample Application
 
@@ -185,7 +185,7 @@ You can find an example form in the _Reviews_ section of each book:
 
 ![ratingform](form.png)
 
-The form submit action is handled in [main.js](https://github.com/kentico-ericd/xperience-statiq-sample/blob/master/input/assets/js/main.js#L38). The form data is gathered and posted to the Xperience REST endpoint. The request must be authenticated using Basic authentication, with the Base64 encoded username and password of an Xperience user (the values have been removed from this repository):
+The form submit action is handled in [main.js](https://github.com/kentico/xperience-statiq-sample/blob/master/input/assets/js/main.js#L38). The form data is gathered and posted to the Xperience REST endpoint. The request must be authenticated using Basic authentication, with the Base64 encoded username and password of an Xperience user (the values have been removed from this repository):
 
 ```js
 headers: {
